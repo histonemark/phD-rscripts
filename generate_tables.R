@@ -11,11 +11,6 @@ fnames = list(
 p5 = "p5/p5_RB_7081_CGATGT_iPCR_insertions.txt",
 p8 = c("p8/p8_RA_7077_ACTTGA_iPCR_insertions.txt",
        "p8/p8_RB_7082_TTAGGC_iPCR_insertions.txt"),
-#p9 = c("p9/p9_RA_7078_GATCAG_iPCR_insertions.txt",
-#       "p9/p9_RB_7083_TGACCA_iPCR_insertions.txt"),
-#p11 = c("p11/p11_10K_7232_CGATGT_iPCR_insertions.txt",
-#        "p11/p11_20K_7238_ACTTGA_iPCR_insertions.txt"),
-#p12 = "p12/p12_RA_7079_TAGCTT_iPCR_insertions.txt",
 p38 = c("p38/p38_10K_7233_TTAGGC_iPCR_insertions.txt",
         "p38/p38_20K_7239_GATCAG_iPCR_insertions.txt"),
 p39 = c("p39/p40_10K_7235_ACAGTG_iPCR_insertions.txt",
@@ -31,9 +26,6 @@ p14 = c("p14/p14_RA_7080_GGCTAC_iPCR_insertions.txt",
 avail = list(
    p5  = list(rep22),
    p8  = list(rep22, rep22),
-#   p9  = list(rep12, rep22),
-#   p11 = list(rep11, rep11),
-#   p12 = list(rep12),
    p38 = list(rep11, rep11),
    p39 = list(rep11, rep11),
    p40 = list(rep11, rep11),
@@ -90,15 +82,14 @@ for (i in 1:length(fnames)) {
          # If there is only one gDNA replicate, keep only the
          # rows with positive count.
          dat = subset(dat,
-                !(chr %in% c("spike", "pT2")) & gdna1 > gdna2Spk/2)
+                !(chr %in% c("spike", "pT2")) & gdna1 > 0)
          dat$gdna1 = dat$gdna1 + gdna1Spk/2
       }
       else {
          # If there are two gDNA replicates, keep only the rows where
          # both are positive.
          dat = subset(dat,
-                !(chr %in% c("spike", "pT2")) &
-                gdna1+gdna2 > gdna1Spk/2+gdna2Spk/2)
+                !(chr %in% c("spike", "pT2")) & gdna1+gdna2 > 0)
          dat$gdna1 = dat$gdna1 + gdna1Spk/2
          dat$gdna2 = dat$gdna2 + gdna2Spk/2
       }
